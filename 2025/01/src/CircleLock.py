@@ -31,3 +31,9 @@ class CircleLock:
             raise "Invalid direction rotate"
 
         return self
+
+    def withReachValue(self, value: int):
+        self.ring_buffer.setSearchReachesValue(value)
+
+    def getCountReachedValue(self) -> int:
+        return self.ring_buffer.getCountIntersectReachedValue()

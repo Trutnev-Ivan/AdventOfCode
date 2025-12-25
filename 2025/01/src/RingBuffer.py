@@ -5,8 +5,9 @@ class RingBuffer:
         if end_digit - start_digit < 1:
             raise "Count buffer must be >= 1"
 
+        self.reach_value = 0
+        self.count_intersects_reached_value = 0
         self.current = Node(start_digit)
-        next_node = None
         prev_node = self.current
 
         for i in range(start_digit + 1, end_digit+1):
@@ -21,9 +22,25 @@ class RingBuffer:
         return self.current.getValue()
 
     def iteratePrev(self, n: int):
+        self.count_intersects_reached_value = 0
+
         for i in range(n):
             self.current = self.current.prev()
 
+            if self.current.getValue() == self.reach_value:
+                self.count_intersects_reached_value += 1
+
     def iterateNext(self, n: int):
+        self.count_intersects_reached_value = 0
+
         for i in range(n):
             self.current = self.current.next()
+
+            if self.current.getValue() == self.reach_value:
+                self.count_intersects_reached_value += 1
+
+    def setSearchReachesValue(self, value: int):
+        self.reach_value = value
+
+    def getCountIntersectReachedValue(self) -> int:
+        return self.count_intersects_reached_value

@@ -16,5 +16,4 @@ with open("rotate.txt", "r") as rotate_file:
 
             rotate_rule = rotate_file.readline()
 
-
       print(count_zeros)
